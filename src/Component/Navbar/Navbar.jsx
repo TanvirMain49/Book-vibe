@@ -14,6 +14,7 @@ const Navbar = () => {
       </li>
     </>
   );
+  
 
   return (
     <div className="navbar bg-base-100">

@@ -1,5 +1,6 @@
-function getStoredList(key) {
-    const storedListStr = localStorage.getItem(key);
+// Function to get the stored Read List
+function getStoredReadList() {
+    const storedListStr = localStorage.getItem('read-list');
     if (storedListStr) {
         return JSON.parse(storedListStr);
     } else {
@@ -7,26 +8,40 @@ function getStoredList(key) {
     }
 }
 
-function addToList(key, id) {
-    const storedList = getStoredList(key);
+// Function to add an item to the Read List
+const addToReadList = (id) => {
+    const storedList = getStoredReadList();
 
     if (storedList.includes(id)) {
-        console.log(id, 'already exists in', key);
+        console.log(id, 'already exists in read list');
     } else {
         storedList.push(id);
         const storedListStr = JSON.stringify(storedList);
-        localStorage.setItem(key, storedListStr);
+        localStorage.setItem('read-list', storedListStr);
     }
 }
 
-// function to add an item to the Read List
-const addToReadList = (id) => {
-    addToList('read-list', id);
+// Function to get the stored Wishlist
+function getStoredWishlist() {
+    const storedListStr = localStorage.getItem('wish-list');
+    if (storedListStr) {
+        return JSON.parse(storedListStr);
+    } else {
+        return [];
+    }
 }
 
-// function to add an item to the Wishlist
+// Function to add an item to the Wishlist
 const addToWishlist = (id) => {
-    addToList('wish-list', id);
+    const storedList = getStoredWishlist();
+
+    if (storedList.includes(id)) {
+        console.log(id, 'already exists in wishlist');
+    } else {
+        storedList.push(id);
+        const storedListStr = JSON.stringify(storedList);
+        localStorage.setItem('wish-list', storedListStr);
+    }
 }
 
-export { addToReadList, addToWishlist };
+export { addToReadList, addToWishlist, getStoredReadList, getStoredWishlist};
