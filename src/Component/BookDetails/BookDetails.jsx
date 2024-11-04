@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import { addToReadList, addToWishlist } from "../Utility/Utility";
 
 const BookDetails = () => {
   const { bookId } = useParams();
@@ -21,13 +22,20 @@ const BookDetails = () => {
     yearOfPublishing,
   } = book;
 
+  const handleRead = (Id) => {
+    addToReadList(Id);
+  };
+  const handleWish = (Id) => {
+    addToWishlist(Id);
+  };
+
   return (
     <div className="hero py-8">
       <div className="flex flex-col lg:flex-row gap-8">
-          <img
-            src={image}
-            className="md:max-h-[764px] md:max-w-[525px] rounded-lg bg-gray-800 p-20 object-cover"
-          />
+        <img
+          src={image}
+          className="md:max-h-[764px] md:max-w-[525px] rounded-lg bg-gray-800 p-20 object-cover"
+        />
         <div>
           <h1 className="text-5xl font-bold">{bookName}</h1>
           <p className="pt-4">By: {author}</p>
@@ -85,8 +93,18 @@ const BookDetails = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="btn px-6 bg-[#23BE0A] text-white font-bold">Read</button>
-            <button className="btn px-4 bg-[#23BE0A] text-white font-bold">Wishlist</button>
+            <button
+              onClick={() => handleRead(bookId)}
+              className="btn px-6 bg-[#23BE0A] text-white font-bold"
+            >
+              Read
+            </button>
+            <button
+              onClick={() => handleWish(bookId)}
+              className="btn px-4 bg-[#23BE0A] text-white font-bold"
+            >
+              Wishlist
+            </button>
           </div>
         </div>
       </div>
